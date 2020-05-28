@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Covid-19 Cost Estimator | Built for Zero</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Google Fonts: Raleway -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,900;1,400;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="body-wrapper">
+        <div id="col1">
+
+            <div id="model">
+                <h2 style="color: white;">ASSUMPTIONS</h2>
+                <p class="helptext" style="color: white; font-size: 15px;">Enter your best guess for the values below.
+                    Then, press the <b>GO!</b> button to view your <b>Estimated Cost Report</b>.</p>
+                <p class="helptext">Upon submission, your assumptions will be anonymously pulled into a national tracker
+                    accessible by our team. We will use this information to continually refine our support to
+                    communities, advocate nationally and enlist support from our network of partners.</p>
+                <br>
+                <br>
+                <form name="submitToGoogleSheet" id="form-input">
+                    <div id="form-wrapper">
+
+                        <div>
+                            <label for="dropdown" style="color: white">COMMUNITY</label>
+                            <div class="helptext">Select your community. If you can't remember your CoC name, <a
+                                    href="https://www.hudexchange.info/grantees/contacts/" target="_new"
+                                    style="color: #ffd2e6;">look it up here</a>.</div>
+                        </div>
+                        <div><select class="input" name="Community" id="community-dropdown"
+                                value="Select a Community"></select></div>
+
+                        <div>
+                            <label for="input" style="color: white;">HOMELESS INDIVIDUALS</label>
+                            <div class="helptext">At least how many individuals are experiencing homelessness in your
+                                community? We also suggest considering inflow into homelessness here.</div>
+                            <div id="datatext"></div>
+                        </div>
+                        <div>
+                            <select style="margin: 0px;" class="input" name="Population" id="population-dropdown"
+                                value="Select a population">
+                                <option>Select a population</option>
+                                <option>Individuals (All)</option>
+                                <option>Chronically homeless individuals</option>
+                                <option>Individuals 50+ years old</option>
+                            </select>
+                            <input class="input" name="Actively Homeless Number" type="number" min="1" value="1000"
+                                id="homeless-input"><br>
+                        </div>
+
+                        <div>
+                            <label for="input" style="color: white">MONTHS</label>
+                            <div class="helptext">How many months would you like to model costs for? (Default: <b>3
+                                    months.</b>)</div>
+                        </div>
+                        <div><input class="form-input" name="Months" type="number" value="3" min="1" id="months-input">
+                        </div>
+
+                        <div>
+                            <label for="input" style="color: white">PERCENT INFECTED</label>
+                            <div class="helptext">What percent of individuals experiencing homeless could be infected
+                                with Covid-19 at one time at the height of the pandemic? (Default: <b>40%</b>, based on
+                                a national <a
+                                    href="https://community.solutions/wp-content/uploads/2020/04/COVID-paper_03272020.pdf"
+                                    target="_new" style="color: #ffd2e6;">UPenn estimate</a>.)</div>
+                        </div>
+                        <div><span style="color: white"><input class="form-input" name="Percent Infected" step="any"
+                                    type="number" min="1" id="percentInfected-input" value="40">&nbsp %</span></div>
+
+                        <div>
+                            <label for="input" style="color: white">COST PER NIGHT FOR QUARANTINE & ISOLATION</label>
+                            <div class="helptext">How much does it cost, per person, per night, to run a Quarantine &
+                                Isolation Shelter? (Default: <b>$100.00</b> per night, based on a national <a
+                                    href="https://community.solutions/wp-content/uploads/2020/04/COVID-paper_03272020.pdf"
+                                    target="_new" style="color: #ffd2e6;">UPenn estimate</a>.)</div>
+                        </div>
+                        <div><span style="color: white">$ &nbsp<input class="form-input" name="Cost per Q&I Bed"
+                                    step="any" type="number" id="costPerBedQI-input" value="100"></span></div>
+
+                        <div>
+                            <label for="input" style="color: white">COST PER YEAR FOR PERMANENT PLACEMENT</label>
+                            <div class="helptext">How much does it cost per year to place (subsidy + services) an
+                                individual in permanent supportive housing? (Default: <b>$12,800</b>, based on a
+                                national <a
+                                    href="https://endhomelessness.org/resource/ending-chronic-homelessness-saves-taxpayers-money-2/"
+                                    target="_new" style="color: #ffd2e6;">NAEH estimate</a>).
+                            </div>
+                        </div>
+                        <div><span style="color: white">$ &nbsp<input class="form-input" name="Cost per PP Bed"
+                                    step="any" type="number" id="costPerBedPP-input" value="12800"></span></div>
+
+                        <h2 style="color: white;">EXISTING FUNDS</h2>
+
+                        <div>
+                            <label for="input" style="color: white">FOR QUARANTINE & ISOLATION</label>
+                            <div class="helptext">How much existing funding do you have, in total, to support a
+                                Quarantine and Isolation shelter?
+                            </div>
+                        </div>
+                        <div>
+                            <input style="margin: 0px;" class="input" name="Existing Q&I Funding Source"
+                                id="sourceQI-input" value="Name of Q&I funding source">
+                            <div><span style="color: white">$ &nbsp<input class="form-input"
+                                        name="Existing Q&I Funding Amount" step="any" type="number"
+                                        id="existingQI-input" value="0"></span></div>
+                        </div>
+
+                        <div>
+                            <label for="input" style="color: white">FOR PERMANENT PLACEMENT</label>
+                            <div class="helptext">How much existing funding do you have, in total, to support permanent
+                                supportive housing placements?
+                            </div>
+                        </div>
+                        <div>
+                            <input style="margin: 0px;" class="input" name="Existing PP Funding Source"
+                                id="sourcePP-input" value="Name of PP funding source">
+                            <div><span style="color: white;">$ &nbsp<input class="form-input"
+                                        name="Existing PP Funding Amount" step="any" type="number" id="existingPP-input"
+                                        value="0"></span></div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div id="button-wrapper">
+                        <button type="submit" id="submit-button">GO!</button>
+                        <div class="warning-text"></div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div id="col2">
+            <h2>ESTIMATED COST REPORT</h2>
+
+            <div id="results">
+
+                <div id="results-information">
+
+                    <div class="topline">
+                        <div>
+                            <p style="font-size: 12px; color: #636467;">COMMUNITY</p>
+                        </div>
+                        <div id="community-topline">COMMUNITY</div>
+                    </div>
+
+                    <div class="topline">
+                        <div>
+                            <p style="font-size: 12px; color: #636467;">POPULATION</p>
+                        </div>
+                        <div id="population-topline">POPULATION</div>
+                    </div>
+
+                    <div class="topline">
+                        <div>
+                            <p style="font-size: 12px; color: #636467;">LENGTH OF TIME</p>
+                        </div>
+                        <div id="months-topline">LENGTH OF TIME</div>
+                    </div>
+
+                    <div class="topline">
+                        <div>
+                            <p style="font-size: 12px; color: #636467;">INFECTION LEVEL</p>
+                        </div>
+                        <div id="infected-topline">INFECTION LEVEL</div>
+                    </div>
+
+                </div>
+
+                <hr style="margin: 15px 0px 15px 0px; height:2px; border-width:0;background-color:rgb(221, 221, 221)">
+
+                <div id="results-beds">
+                    <div class="topline">
+                        <div class="topline-label">TOTAL BEDS NEEDED</div>
+                        <div class="helptext-results">The total number of beds you need to provide.</div>
+                        <div class="helptext-calc" id="beds-calc">CALCULATION</div>
+                    </div>
+                    <div class="topline-value" id="bedsTotal-topline">VALUE</div>
+                </div>
+
+                <hr style="margin: 15px 0px 15px 0px; height:2px; border-width:0;background-color:rgb(221, 221, 221)">
+
+                <div id="results-qi">
+                    <div class="topline">
+                        <div class="topline-label">TOTAL COST OF Q&I UNITS</div>
+                        <div class="helptext-results">If you were to only provide quarantine and isolation units for the
+                            beds you need, how much would it cost (taking existing funding sources into account)?</div>
+                        <div class="helptext-calc" id="costQI-calc">CALCULATION</div>
+                    </div>
+                    <div class="topline-value" id="costQI-topline">VALUE</div>
+                </div>
+
+                <hr style="margin: 15px 0px 15px 0px; height:2px; border-width:0;background-color:rgb(221, 221, 221)">
+
+                <div id="results-pp">
+                    <div class="topline">
+                        <div class="topline-label">TOTAL COST OF PERMANENT SUPPORTIVE HOUSING UNITS</div>
+                        <div class="helptext-results">If you were to only provide permanent supportive housing units for
+                            the beds you need, how much would it cost (taking existing funding sources into account)?</div>
+                        <div class="helptext-calc" id="costPP-calc">CALCULATION</div>
+                    </div>
+                    <div class="topline-value" id="costPP-topline">VALUE</div>
+                </div>
+
+                <hr style="margin: 15px 0px 15px 0px; height:2px; border-width:0;background-color:rgb(221, 221, 221)">
+
+                <div id="charts">
+                    <div id="chart1">
+                        <div id="chart1-title">ESTIMATED COST COMPARISON</div>
+                        <div id="chart1-subtitle">Based on your inputs and existing funding sources, compare the <b>estimated cost</b> of providing all of the beds you need through <b>quarantine & isolation</b> vs. <b>permanent supportive housing</b>. 
+                            <br> 
+                            <br> 
+                        <b>Hover or click on dots</b> to see how your estimated cost changes based on the percentage of your population that may be infected at one time.</div>
+                        <br>
+                        <div id="chart1-viz"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- D3 script -->
+    <script src="./lib/d3.js"></script>
+
+    <!-- Main JS script -->
+    <script type="module" src="./main.js"></script>
+
+</body>
+
+</html>
