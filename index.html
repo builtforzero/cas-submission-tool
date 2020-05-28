@@ -7,8 +7,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Google Fonts: Raleway -->
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,900;1,400;1,900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -19,32 +18,34 @@
 
         <div id="header">
             <div id="header-wrapper">
-                <h1>Symptom Alert System for Shelters (SASS)</h1>
-                <p>Learning about the number of people in your facility who have symptoms will help mobilize the public
-                    health response and support that your facility may need.</p>
-
-                <p>
-                    MDH will contact your shelter within 24 hours of seeing a trend that requires follow-up. If you are
-                    concerned that there is an outbreak in your shelter, please contact MDH immediately at 651-201-5414.
-                </p>
-
-                <p>
-                    INSTRUCTIONS: Please enter one day of information per survey (this will allow us to see changes over
-                    time).</p>
-
-                <p>
-                    COVID-19 symptoms include:
-
-                    New or worsening cough
-                    Fever (temperature over 100.4 F)
-                    Trouble breathing/shortness of breath
-                    Body aches
-                    Tiredness/fatigue
-                </p>
+                <h1 id="title">Symptom Alert System for Shelters (SASS)</h1>
+                <div id="subtitle">
+                    <p>Learning about the number of people in your facility who have symptoms will help mobilize the public
+                        health response and support that your facility may need.</p>
+    
+                    <p>
+                        MDH will contact your shelter within 24 hours of seeing a trend that requires follow-up. If you are
+                        concerned that there is an outbreak in your shelter, please contact MDH immediately at 651-201-5414.
+                    </p>
+    
+                    <p>
+                        INSTRUCTIONS: Please enter one day of information per survey (this will allow us to see changes over
+                        time).</p>
+    
+                    <p>
+                        COVID-19 symptoms include:
+    
+                        New or worsening cough
+                        Fever (temperature over 100.4 F)
+                        Trouble breathing/shortness of breath
+                        Body aches
+                        Tiredness/fatigue
+                    </p>
+                </div>
             </div>
         </div>
 
-        <div>
+        <div id="form">
             <form name="submitToGoogleSheet" id="form-input">
                 <div id="form-wrapper">
 
@@ -59,7 +60,7 @@
                             <select class="input" name="Facility" id="facility-dropdown"></select>
                         </div>
 
-                        <div id="other-facility-info">
+                        <div id="other-facility-info" style="display:none;">
                             <div class="form-block">
                                 <label class="question">Name of your facility:</label>
                                 <input class="input" name="Other Facility Name" id="otherName-input"
@@ -202,6 +203,7 @@
                         <div class="form-input">
                             <div class="form-input">
                                 <select class="input" name="Sufficient PPE?" id="ppe-dropdown">
+                                    <option>Select an Option</option>
                                     <option>Yes</option>
                                     <option>No</option>
                                 </select>
@@ -223,7 +225,7 @@
                     </div>
 
                     <div id="button-wrapper">
-                        <button type="submit" id="submit-button">GO!</button>
+                        <button type="submit" id="submit-button">SUBMIT</button>
                         <div class="warning-text"></div>
                     </div>
 
