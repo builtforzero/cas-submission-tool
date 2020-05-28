@@ -17,56 +17,221 @@
 
     <div id="content">
 
-        <div></div>
+        <div id="header">
+            <div id="header-wrapper">
+                <h1>Symptom Alert System for Shelters (SASS)</h1>
+                <p>Learning about the number of people in your facility who have symptoms will help mobilize the public
+                    health response and support that your facility may need.</p>
+
+                <p>
+                    MDH will contact your shelter within 24 hours of seeing a trend that requires follow-up. If you are
+                    concerned that there is an outbreak in your shelter, please contact MDH immediately at 651-201-5414.
+                </p>
+
+                <p>
+                    INSTRUCTIONS: Please enter one day of information per survey (this will allow us to see changes over
+                    time).</p>
+
+                <p>
+                    COVID-19 symptoms include:
+
+                    New or worsening cough
+                    Fever (temperature over 100.4 F)
+                    Trouble breathing/shortness of breath
+                    Body aches
+                    Tiredness/fatigue
+                </p>
+            </div>
+        </div>
 
         <div>
-            <h1>ASSUMPTIONS</h1>
-            <p class="helptext">Enter your best guess for the values below.
-                Then, press the <b>GO!</b> button to view your <b>Estimated Cost Report</b>.</p>
             <form name="submitToGoogleSheet" id="form-input">
                 <div id="form-wrapper">
 
                     <!-- Facility Name / Contact -->
                     <div class="form-block">
                         <div class="form-label">
-                            <h3>FACILITY</h3>
-                            <div class="helptext">Please select your facility.</div>
+                            <div class="question">Please select your facility.</div>
+                            <div class="helptext">If your facility is not listed, select "Other" and enter your
+                                information in the form fields that appear.</div>
                         </div>
                         <div class="form-input">
                             <select class="input" name="Facility" id="facility-dropdown"></select>
                         </div>
-                        <div class="form-input">
-                            <label>If your facility is not on the list above, please enter it here:</label>
-                            <input class="input" name="Other Facility Name" id="otherName-input"
-                                placeholder="Name of Other Facility">
-                        </div>
-                        <div class="form-input">
-                            <label>Who should we should contact at the facility if we have questions or need to
-                                follow-up?</label>
-                            <input class="input" name="Name" id="name-input" placeholder="Name of Contact Person">
-                        </div>
-                        <div class="form-input">
-                            <label>Please provide a phone number your contact person can be reached at:</label>
-                            <input class="input" name="Phone" id="phone-input" type="tel"
-                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890">
-                        </div>
-                        <div class="form-input">
-                            <label>Please provide an email address your contact person can be reached at:</label>
-                            <input class="input" name="Email" id="email-input" type="email"
-                                placeholder="name@email.com">
+
+                        <div id="other-facility-info">
+                            <div class="form-block">
+                                <label class="question">Name of your facility:</label>
+                                <input class="input" name="Other Facility Name" id="otherName-input"
+                                    placeholder="Name of Other Facility">
+                            </div>
+                            <div class="form-block">
+                                <label class="question">Who should we should contact at the facility if we have
+                                    questions or need to
+                                    follow-up?</label>
+
+                                <input class="input" name="Name" id="name-input" placeholder="Name of Contact Person">
+                            </div>
+                            <div class="form-block">
+                                <label class="question">Please provide a phone number your contact person can be reached
+                                    at:</label>
+                                <input class="input" name="Phone" id="phone-input" type="tel"
+                                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890">
+                            </div>
+                            <div class="form-block">
+                                <label class="question">Please provide an email address your contact person can be
+                                    reached at:</label>
+                                <input class="input" name="Email" id="email-input" type="email"
+                                    placeholder="name@email.com">
+                            </div>
                         </div>
                     </div>
 
+                    <hr>
+
+                    <span>
+                        <h2>Reporting for <b class="facility-title">your facility</b></h2>
+                    </span>
+
+                    <!-- Reporting Date -->
+                    <div class="form-block">
+                        <div class="form-label">
+                            <div class="question">Enter the date you are reporting for:</div>
+                            <div class="helptext">Report on one day</div>
+                        </div>
+                        <div class="form-input">
+                            <input class="input" type="date" name="Date" id="date-input">
+                        </div>
+                    </div>
+
+                    <!-- New people with symptoms -->
+                    <div class="form-block">
+                        <div class="form-label">
+                            <div class="question">How many new people were flagged as having symptoms that could
+                                potentially be COVID-19
+                                (including new guests at intake and existing guests) on your reporting date?</div>
+                            <div class="helptext">Only count new new cases that have not already been reported by your
+                                shelter/facility</div>
+                        </div>
+                        <div class="form-input">
+                            <input class="input" type="number" name="New People With Symptoms" id="new-input"
+                                placeholder="Enter a number">
+                        </div>
+                    </div>
+
+                    <!-- Staff out for illness -->
+                    <div class="form-block">
+                        <div class="form-label">
+                            <div class="question">How many staff members are out due to illness <i>today</i>?</div>
+                        </div>
+                        <div class="form-input">
+                            <input class="input" type="number" name="Staff Out" id="staffOut-input"
+                                placeholder="Enter a number">
+                        </div>
+                    </div>
+
+                    <!-- Volunteers out for illness -->
+                    <div class="form-block">
+                        <div class="form-label">
+                            <div class="question">How many volunteers, scheduled to be working <i>today</i> were unable
+                                to come into work
+                                due
+                                to illness?</div>
+                        </div>
+                        <div class="form-input">
+                            <input class="input" type="number" name="Volunteers Out" id="volOut-input"
+                                placeholder="Enter a number">
+                        </div>
+                    </div>
+
+                    <!-- Staff working today -->
+                    <div class="form-block">
+                        <div class="form-label">
+                            <span>
+                                <div class="question">How many staff do you have working at your facility for your
+                                    reporting date: <b class="reporting-date">date</b>?</div>
+                            </span>
+                        </div>
+                        <div class="form-input">
+                            <input class="input" type="number" name="Staff Working" id="staffWork-input"
+                                placeholder="Enter a number">
+                        </div>
+                    </div>
+
+                    <!-- Number tested -->
+                    <div class="form-block">
+                        <div class="form-label">
+                            <div class="question">As of today, what is the total number of people at your shelter that
+                                have been tested
+                                for
+                                COVID-19?</div>
+                            <div class="helptext">(Include staff, volunteers, and guests tested <b>on any date</b>)
+                            </div>
+                        </div>
+                        <div class="form-input">
+                            <input class="input" type="number" name="Total Tested" id="tested-input"
+                                placeholder="Enter a number">
+                        </div>
+                    </div>
+
+                    <!-- Comments -->
+                    <div class="form-block">
+                        <div class="form-label">
+                            <div class="question">Additional comments on symptomatic and/or tested cases:</div>
+                        </div>
+                        <div class="form-input">
+                            <textarea class="input" type="text" name="Comments" id="tested-input"
+                                placeholder="Enter a comment"></textarea>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <span>
+                        <h2>Optional questions for <b class="facility-title">your facility</b> on <b
+                                class="reporting-date">this date</b></h2>
+                    </span>
+
+                    <!-- Sufficient PPE -->
+                    <div class="form-block">
+                        <div class="form-label">
+                            <div class="question">Does your facility have enough personal protective equipment (PPE) for
+                                staff/volunteers
+                                for the next week?</div>
+                        </div>
+                        <div class="form-input">
+                            <div class="form-input">
+                                <select class="input" name="Sufficient PPE?" id="ppe-dropdown">
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other Important Information -->
+                    <div class="form-block">
+                        <div class="form-label">
+                            <div class="question">Is there other important information you'd like us to know?</div>
+                            <div class="helptext">(e.g. need for supplies, closures due to staff and volunteer illness,
+                                etc.)</div>
+                        </div>
+                        <div class="form-input">
+                            <textarea class="input" type="text" name="Additional Info" id="tested-input"
+                                placeholder="Enter a comment"></textarea>
+                        </div>
+                    </div>
 
                     <div id="button-wrapper">
                         <button type="submit" id="submit-button">GO!</button>
                         <div class="warning-text"></div>
                     </div>
 
+
+
             </form>
         </div>
 
-        <div></div>
     </div>
 
     <!-- D3 script -->
