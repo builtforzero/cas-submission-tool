@@ -21,27 +21,6 @@ h1, h2 {
   padding: 0;
 }
 
-.reporting-date, .facility-title {
-  font-weight: 900;
-}
-
-hr {
-  margin: 10% 0%;
-}
-
-#content {
-  margin: 3% 5%;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  column-gap: 5%;
-}
-
-#header-wrapper {
-  position: sticky;
-  top: 20px;
-  color: white;
-}
-
 #title {
   color: white;
 }
@@ -50,9 +29,34 @@ hr {
   color: #b5ecff;
 }
 
+#content {
+  margin: 0% 3%;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  column-gap: 5%;
+}
+
+.reported-values {
+  font-weight: 900;
+  color: #0494cb;
+}
+
+hr {
+  margin: 8% 0%;
+  height:2px;
+  border-width:0;
+  background-color:rgb(221, 221, 221);
+}
+
+#header-wrapper {
+  position: sticky;
+  top: 20px;
+  color: white;
+}
+
 #form {
   background-color: white;
-  padding: 2% 10%;
+  padding: 2% 7%;
 }
 
 .form-block {
@@ -63,7 +67,7 @@ hr {
   margin: 1% 0% 0% 0%;
   padding: 5px;
   font-family: "Raleway";
-  width: 95%;
+  width: 100%;
   font-size: 18px;
 }
 
@@ -73,11 +77,35 @@ hr {
   font-weight: 600;
 }
 
+.required-symbol {
+  color: red;
+}
+
 .helptext {
   font-size: 14px;
   margin: 0%;
   color: grey;
 }
+
+.hide {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+.checkmark {
+  font-size: 20px;
+  margin: 0%;
+}
+
+.success-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0px 0px 5px 0px;
+}
+
 
 
 
@@ -106,8 +134,33 @@ button:hover {
   justify-content: center;
 }
 
-.warning-text {
-  text-align: left;
-  padding: 15px;
-  font-size: 12px;
-}
+
+
+/* MEDIA BREAKPOINT */
+
+@media (max-width: 800px) {
+
+  #content {
+    margin: 3% 5%;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  #header-wrapper {
+    position: static;
+    color: white;
+    margin: 2% 5% 10% 5%;
+  }
+
+  hr {
+    margin: 15% 0%;
+    height:2px;
+    border-width:0;
+    background-color:rgb(221, 221, 221);
+  }
+
+  .form-block {
+    margin: 10% 0%;
+  }
+
+ }

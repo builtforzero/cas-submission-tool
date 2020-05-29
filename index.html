@@ -7,7 +7,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Google Fonts: Raleway -->
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -20,21 +22,25 @@
             <div id="header-wrapper">
                 <h1 id="title">Symptom Alert System for Shelters (SASS)</h1>
                 <div id="subtitle">
-                    <p>Learning about the number of people in your facility who have symptoms will help mobilize the public
+                    <p>Learning about the number of people in your facility who have symptoms will help mobilize the
+                        public
                         health response and support that your facility may need.</p>
-    
+
                     <p>
-                        MDH will contact your shelter within 24 hours of seeing a trend that requires follow-up. If you are
-                        concerned that there is an outbreak in your shelter, please contact MDH immediately at 651-201-5414.
+                        MDH will contact your shelter within 24 hours of seeing a trend that requires follow-up. If you
+                        are
+                        concerned that there is an outbreak in your shelter, please contact MDH immediately at
+                        651-201-5414.
                     </p>
-    
+
                     <p>
-                        INSTRUCTIONS: Please enter one day of information per survey (this will allow us to see changes over
+                        INSTRUCTIONS: Please enter one day of information per survey (this will allow us to see changes
+                        over
                         time).</p>
-    
+
                     <p>
                         COVID-19 symptoms include:
-    
+
                         New or worsening cough
                         Fever (temperature over 100.4 F)
                         Trouble breathing/shortness of breath
@@ -47,29 +53,28 @@
 
         <div id="form">
             <form name="submitToGoogleSheet" id="form-input">
-                <div id="form-wrapper">
+                <div id="form-wrapper" class="hide">
 
                     <!-- Facility Name / Contact -->
                     <div class="form-block">
                         <div class="form-label">
-                            <div class="question">Please select your facility.</div>
+                            <div class="question"><span><b class="required-symbol">*</b>Please select your facility.</span></div>
                             <div class="helptext">If your facility is not listed, select "Other" and enter your
                                 information in the form fields that appear.</div>
                         </div>
                         <div class="form-input">
-                            <select class="input" name="Facility" id="facility-dropdown"></select>
+                            <select class="input" name="Facility" id="facility-dropdown" placeholder=""></select>
                         </div>
 
-                        <div id="other-facility-info" style="display:none;">
+                        <div id="other-facility-info" class="hide">
                             <div class="form-block">
-                                <label class="question">Name of your facility:</label>
+                                <label class="question"><span><b class="required-symbol">*</b>Name of your facility:</span></label>
                                 <input class="input" name="Other Facility Name" id="otherName-input"
-                                    placeholder="Name of Other Facility">
+                                    placeholder="Enter text">
                             </div>
                             <div class="form-block">
                                 <label class="question">Who should we should contact at the facility if we have
-                                    questions or need to
-                                    follow-up?</label>
+                                    questions or need to follow-up?</label>
 
                                 <input class="input" name="Name" id="name-input" placeholder="Name of Contact Person">
                             </div>
@@ -91,13 +96,13 @@
                     <hr>
 
                     <span>
-                        <h2>Reporting for <b class="facility-title">your facility</b></h2>
+                        <h2>Reporting for <b class="reported-values" id="facility-value">your facility</b></h2>
                     </span>
 
                     <!-- Reporting Date -->
                     <div class="form-block">
                         <div class="form-label">
-                            <div class="question">Enter the date you are reporting for:</div>
+                            <div class="question"><span><b class="required-symbol">*</b>Enter the date you are reporting for:</span></div>
                             <div class="helptext">Report on one day</div>
                         </div>
                         <div class="form-input">
@@ -150,7 +155,7 @@
                         <div class="form-label">
                             <span>
                                 <div class="question">How many staff do you have working at your facility for your
-                                    reporting date: <b class="reporting-date">date</b>?</div>
+                                    reporting date: <b class="reported-values" id="date-value">date</b>?</div>
                             </span>
                         </div>
                         <div class="form-input">
@@ -189,8 +194,8 @@
                     <hr>
 
                     <span>
-                        <h2>Optional questions for <b class="facility-title">your facility</b> on <b
-                                class="reporting-date">this date</b></h2>
+                        <h2>Optional questions for <b class="reported-values" id="facility-value">your facility</b> on
+                            <b class="reported-values" id="date-value">this date</b></h2>
                     </span>
 
                     <!-- Sufficient PPE -->
@@ -225,9 +230,12 @@
                     </div>
 
                     <div id="button-wrapper">
-                        <button type="submit" id="submit-button">SUBMIT</button>
-                        <div class="warning-text"></div>
+                        <button type="submit" id="submit-button">
+                            <div class="submit-text">SUBMIT</div>
+                        </button>
                     </div>
+                    <div class="success-message"></div>
+
 
 
 
@@ -235,6 +243,9 @@
         </div>
 
     </div>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/6922adca96.js" crossorigin="anonymous"></script>
 
     <!-- D3 script -->
     <script src="./lib/d3.js"></script>
@@ -244,6 +255,8 @@
 
     <!-- Main JS script -->
     <script type="module" src="./main.js"></script>
+
+    
 
 </body>
 
