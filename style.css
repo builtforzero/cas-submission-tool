@@ -93,18 +93,7 @@ hr {
   left: -9999px !important;
 }
 
-.checkmark {
-  font-size: 20px;
-  margin: 0%;
-}
 
-.success-message {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0px 0px 5px 0px;
-}
 
 
 
@@ -132,6 +121,19 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.checkmark {
+  font-size: 20px;
+  margin: 0%;
+}
+
+.success-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0px 0px 5px 0px;
 }
 
 
