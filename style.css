@@ -102,7 +102,7 @@ hr {
 /* SUBMIT BUTTON */
 
 button {
-  width: 60%;
+  width: 90%;
   margin: 5%;
   padding: 10px;
   color: var(--secondary-color);
@@ -138,17 +138,16 @@ button:hover {
 .submit-again-container {
   margin: 5%;
   padding: 10px;
+  background-color: var(--main-color);
 }
 
 .submit-again {
   color: var(--secondary-color);
   font-weight: 900;
   text-decoration: none;
-  background-color: var(--main-color);
-  padding: 15px;
 }
 
-.submit-again:hover {
+.submit-again-container:hover {
   background-color: var(--button-hover-color);
 }
 
