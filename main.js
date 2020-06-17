@@ -9,7 +9,7 @@ let state = {
   name: null,
   phone: null,
   email: null,
-  date: "",
+  date: "mm/dd/yyyy",
   new: 0,
   staffOut: 0,
   volOut: 0,
@@ -22,7 +22,10 @@ let state = {
   // functions
   format: d3.format(","),
   timeFormat: d3.timeFormat("%B %d, %Y"),
+  parseTime: d3.timeParse("%Y-%m-%d")
 };
+
+
 
 
 /* SUBMIT DATA TO GOOGLE SHEETS */
@@ -42,31 +45,15 @@ function submitData(scriptURL, form) {
       .then((response) => 
         console.log("Success!", response),
 
-        d3.select(".submit-text")
-          .classed('hide', false)
-          .text("")
-          .html("<i class='fas fa-check'></i>")
-          .style("opacity", "0")
-          .transition()
-          .duration(1000)
-          .style("opacity", "1")
-          .transition()
-          .duration(500)
-          .style("opacity", "0")
-          .transition()
-          .duration(500)
-          .style("opacity", "1")
-          .text("SUBMIT"),
+        d3.select(".success-wrapper")
+        .classed('hide', true),
 
         d3.select(".success-message")
-          .text("Successfully submitted data for " + state.facility)
+          .html("<i class='fas fa-check' style='color: var(--main-color);'></i> <b> Successfully submitted data for " + state.facility + "!</b><br><br> <div class='submit-again-container'><a class='submit-again' href='https://builtforzero.github.io/cas-submission-tool/'>SUBMIT ANOTHER RESPONSE</a></div>")
           .style("opacity", "0")
           .transition()
           .duration(1000)
           .style("opacity", "1")
-          .transition()
-          .duration(1000)
-          .style("opacity", "0"),
 
           )
 
@@ -140,6 +127,8 @@ function app() {
   let facilityName = d3.selectAll("#facility-value")
   let reportedDate = d3.selectAll("#date-value")
 
+  reportedDate.text(state.timeFormat(new Date()))
+
   let selectCommunity = d3
     .select("#facility-dropdown")
     .selectAll("option")
@@ -154,6 +143,7 @@ function app() {
       state.facility = this.value;
       toggleFields();
       facilityName.text(this.value);
+
     })
 
   let otherFacilityInput = d3
@@ -169,8 +159,8 @@ function app() {
   let dateInput = d3
     .select("#date-input")
     .on("change", function() {
-      state.date = this.value;
-      reportedDate.text(this.value);
+      state.date = state.timeFormat(state.parseTime(this.value));
+      reportedDate.text(state.timeFormat(state.parseTime(this.value)));
       buttonState();
     })
 
