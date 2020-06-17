@@ -20,20 +20,97 @@ let state = {
   info: null,
 
   // functions
-  format: d3.format(","),
   timeFormat: d3.timeFormat("%B %d, %Y"),
-  parseTime: d3.timeParse("%Y-%m-%d")
+  parseTime: d3.timeParse("%Y-%m-%d"),
+
+  // Organization Info
+  cityName: "Exampleville, CA",
+  orgName: "Exampleville Department of Health",
+  orgAbbrev: "EDH",
+  orgPhone: "555-555-5555"
 };
 
 
+/* DATA SOURCES */
 
-
-/* SUBMIT DATA TO GOOGLE SHEETS */
+// URL of Google Apps script to get form data
 let scriptURL = "https://script.google.com/macros/s/AKfycbwaZWG2T8NDItYRzcUO-WKlgfczOxfxdnYzonzvhKGNkWJp7rc/exec";
+
+// Name of form object in HTML
 let form = document.forms["submitToGoogleSheet"];
 
-d3.select(".loader")
+// URL of Google Sheet with facility names
+let sourceURL = "https://docs.google.com/spreadsheets/d/1ig335662dQcrn20eKKKDfBMjI54Rog9coMIQ9jrd2XE/edit#gid=2091058387";
 
+
+
+/* INITIALIZE APP AND LOAD DATA */
+
+function init() {
+  // Initialize Tabletop.js with data source URL and callback function
+  Tabletop.init({
+    key: sourceURL,
+    callback: loadData,
+    simpleSheet: true,
+    header: false
+  })
+  
+  // Replace custom city and org information
+  d3.selectAll(".city-name").text(state.cityName)
+  d3.selectAll(".org-name").text(state.orgName)
+  d3.selectAll(".org-abbrev").text(state.orgAbbrev)
+  d3.selectAll(".org-phone").text(state.orgPhone)
+}
+
+// Callback function for Tabletop.js
+function loadData(data, tabletop) {
+  // Load facility names data
+  state.facilityList = d3.map(data, d => d.Values).keys().sort();
+  state.facilityList.unshift(["Select a Facility"], ["Other (My Facility Is Not Listed Here)"])
+  
+  // Once data is loaded, unhide the form fields and call the app
+  d3.select("#form-wrapper").classed("hide", false)
+  app();
+}
+
+init();
+
+
+
+/* APP FUNCTIONS */
+
+// Toggle showing 'Other Facility' fields
+function toggleFields(){
+  if (state.facility == "Other (My Facility Is Not Listed Here)") {
+    d3.select("#other-facility-info")
+      .classed('hide', false);
+  } else if (state.facility != "Other (My Facility Is Not Listed Here)") {
+    d3.select("#other-facility-info")
+    .classed('hide', true);
+  }
+}
+
+// Check the state of the submit button
+// Require entering a facility name and reporting date to enable
+function buttonState() {
+  if (
+    state.facility === "Select a Facility" || state.date === "" || (state.facility == "Other (My Facility Is Not Listed Here)" && state.otherName == "")
+  ) {
+    d3.select("#submit-button")
+      .attr("disabled", "true")
+      .attr("style", "background-color: rgb(211, 211, 211); border: 2px solid rgb(211, 211, 211); color: white;");
+    d3.select(".success-message").text(
+      "Please enter a facility name and reporting date to continue."
+    );
+  } else if (
+    (state.community != "Select a Facility" && state.population != "") || (state.facility == "Other (My Facility Is Not Listed Here)" && state.otherName != "" && state.population != "")
+  ) {
+    d3.select("#submit-button").attr("disabled", null).attr("style", "");
+    d3.select(".success-message").text("");
+  }
+}
+
+// Submit form data to Google Sheets
 function submitData(scriptURL, form) {
   form.addEventListener("submit", (e) => {
     console.log("Submitting Data!");
@@ -65,70 +142,17 @@ function submitData(scriptURL, form) {
 }
 
 
-/* LOAD GOOGLE SHEETS DATA */
-// Initialize Tabletop.js with data source URL and callback function
-let docURL = "https://docs.google.com/spreadsheets/d/1DPQURKRfsfkJEhroeEoXbESJw4nzKJ6s0Et0NO62SK4/edit#gid=0";
-function init() {
-  Tabletop.init({
-    key: docURL,
-    callback: loadData,
-    simpleSheet: true,
-    header: false
-  })
-}
-// Assign Google Sheets data to state, then call the app
-function loadData(data, tabletop) {
-  state.facilityList = d3.map(data, d => d.Values).keys().sort();
-  state.facilityList.unshift(["Select a Facility"], ["Other (My Facility Is Not Listed Here)"])
-  d3.select("#form-wrapper").classed("hide", false)
-  app();
-}
-
-
-
-function toggleFields(){
-  if (state.facility == "Other (My Facility Is Not Listed Here)") {
-    d3.select("#other-facility-info")
-      .classed('hide', false);
-  } else if (state.facility != "Other (My Facility Is Not Listed Here)") {
-    d3.select("#other-facility-info")
-    .classed('hide', true);
-  }
-}
-
-
-function buttonState() {
-  if (
-    state.facility === "Select a Facility" || state.date === "" || (state.facility == "Other (My Facility Is Not Listed Here)" && state.otherName == "")
-  ) {
-    d3.select("#submit-button")
-      .attr("disabled", "true")
-      .attr("style", "background-color: rgb(211, 211, 211); border: 2px solid rgb(211, 211, 211); color: white;");
-    d3.select(".success-message").text(
-      "Please enter a facility name and reporting date to continue."
-    );
-  } else if (
-    (state.community != "Select a Facility" && state.population != "") || (state.facility == "Other (My Facility Is Not Listed Here)" && state.otherName != "" && state.population != "")
-  ) {
-    d3.select("#submit-button").attr("disabled", null).attr("style", "");
-    d3.select(".success-message").text("");
-  }
-}
-
-init();
-
 /* APP */
 
 function app() {
-  // Submit form data to Google Sheets
+
   submitData(scriptURL, form);
   buttonState();
 
   let facilityName = d3.selectAll("#facility-value")
   let reportedDate = d3.selectAll("#date-value")
 
-  reportedDate.text(state.timeFormat(new Date()))
-
+  // Add facility names to dropdown
   let selectCommunity = d3
     .select("#facility-dropdown")
     .selectAll("option")
@@ -137,15 +161,16 @@ function app() {
     .attr("value", (d) => d)
     .text((d) => d);
 
+  // Update chosen facility from dropdown
   let facilityInput = d3
     .select("#facility-dropdown")
     .on("change", function() {
       state.facility = this.value;
       toggleFields();
       facilityName.text(this.value);
-
     })
 
+  // Event listener on 'Other Facility' fields
   let otherFacilityInput = d3
     .select("#otherName-input")
     .on("change", function() {
@@ -156,6 +181,7 @@ function app() {
       buttonState();
     })
 
+  // Event listener on reported date field
   let dateInput = d3
     .select("#date-input")
     .on("change", function() {
