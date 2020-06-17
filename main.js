@@ -27,7 +27,8 @@ let state = {
   cityName: "Exampleville, CA",
   orgName: "Exampleville Department of Health",
   orgAbbrev: "EDH",
-  orgPhone: "555-555-5555"
+  orgPhone: "555-555-5555",
+  orgEmail: "exampleville@email.com"
 };
 
 
@@ -60,6 +61,7 @@ function init() {
   d3.selectAll(".org-name").text(state.orgName)
   d3.selectAll(".org-abbrev").text(state.orgAbbrev)
   d3.selectAll(".org-phone").text(state.orgPhone)
+  d3.selectAll(".org-email").text(state.orgEmail)
 }
 
 // Callback function for Tabletop.js
@@ -126,7 +128,7 @@ function submitData(scriptURL, form) {
         .classed('hide', true),
 
         d3.select(".success-message")
-          .html("<i class='fas fa-check' style='color: var(--main-color);'></i> <b> Successfully submitted data for " + state.facility + "!</b><br><br> <div class='submit-again-container'><a class='submit-again' href='https://builtforzero.github.io/cas-submission-tool/'>SUBMIT ANOTHER RESPONSE</a></div>")
+          .html("<i class='fas fa-check' style='color: var(--main-color);'></i> <br> <b> Thank you for reporting data for " + state.facility + "! <br><br> The " + state.orgName + " will contact you within 24 hours of noticing a trend that requires follow-up. If you have immediate concerns, please reach out to " + state.orgPhone + " or " + state.orgEmail + ".</b><br><br> <div class='submit-again-container'><a class='submit-again' href='https://builtforzero.github.io/cas-submission-tool/'>SUBMIT ANOTHER RESPONSE</a></div>")
           .style("opacity", "0")
           .transition()
           .duration(1000)

@@ -29,7 +29,7 @@
                         health response and support that your facility may need.</p>
 
                     <p>
-                        The <b class="custom-text org-name"></b> (<b class="custom-text org-abbrev"></b>) will contact your shelter within 24 hours of seeing a trend that requires follow-up. If you are concerned that there is an outbreak in your shelter, please contact <b class="custom-text org-abbrev"></b> immediately at <b class="custom-text org-phone"></b>.
+                        The <b class="custom-text org-name"></b> (<b class="custom-text org-abbrev"></b>) will contact your shelter within 24 hours of seeing a trend that requires follow-up. If you are concerned that there is an outbreak in your facility, please contact <b class="custom-text org-abbrev"></b> immediately at <b class="custom-text org-phone"></b> or <b class="custom-text org-email"></b>.
                     </p>
 
                     <p>
@@ -118,15 +118,26 @@
                             </div>
                         </div>
 
+                        <!-- New people testing positive -->
+                        <div class="form-block">
+                            <div class="form-label">
+                                <div class="question">How many new people  were flagged as having <b>tested positive</b> for COVID-19 on your reporting date?</div>
+                                <div class="helptext">Include new guests at intake and existing guests. Only count new cases that have not already been reported by
+                                    your shelter/facility.</div>
+                            </div>
+                            <div class="form-input">
+                                <input class="input" type="number" name="New People Testing Positive" id="new-tested-input"
+                                    placeholder="Enter a number">
+                            </div>
+                        </div>
+
                         <!-- New people with symptoms -->
                         <div class="form-block">
                             <div class="form-label">
-                                <div class="question">How many new people were flagged as having symptoms that could
-                                    potentially be COVID-19
-                                    (including new guests at intake and existing guests) on your reporting date?</div>
-                                <div class="helptext">Only count new new cases that have not already been reported by
-                                    your
-                                    shelter/facility</div>
+                                <div class="question">How many new people were flagged as having <b>symptoms</b> that could
+                                    potentially be COVID-19 on your reporting date?</div>
+                                <div class="helptext">Include new guests at intake and existing guests. Only count new cases that have not already been reported by
+                                    your shelter/facility.</div>
                             </div>
                             <div class="form-input">
                                 <input class="input" type="number" name="New People With Symptoms" id="new-input"
@@ -182,7 +193,7 @@
                                     have been tested
                                     for
                                     COVID-19?</div>
-                                <div class="helptext">(Include staff, volunteers, and guests tested <b>on any date</b>)
+                                <div class="helptext">Include staff, volunteers, and guests tested <b>on any date</b>
                                 </div>
                             </div>
                             <div class="form-input">
@@ -221,6 +232,22 @@
                             <div class="form-input">
                                 <div class="form-input">
                                     <select class="input" name="Sufficient PPE?" id="ppe-dropdown">
+                                        <option>Select an Option</option>
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Preparedness Plan-->
+                        <div class="form-block">
+                            <div class="form-label">
+                                <div class="question">Do you have a preparedness plan ready in the event of future outbreaks of COVID-19?</div>
+                            </div>
+                            <div class="form-input">
+                                <div class="form-input">
+                                    <select class="input" name="Preparedness Plan?" id="plan-dropdown">
                                         <option>Select an Option</option>
                                         <option>Yes</option>
                                         <option>No</option>
