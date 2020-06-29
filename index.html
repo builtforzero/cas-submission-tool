@@ -121,29 +121,54 @@
                         <!-- New people testing positive -->
                         <div class="form-block">
                             <div class="form-label">
-                                <div class="question">How many new people  were flagged as having <b>tested positive</b> for COVID-19 on your reporting date?</div>
-                                <div class="helptext">Include new guests at intake and existing guests. Only count new cases that have not already been reported by
+                                <div class="question">How many new staff and clients were flagged as having <b>tested positive</b> for COVID-19 on your reporting date?</div>
+                                <div class="helptext">Only count new cases that have not already been reported by
                                     your shelter/facility.</div>
                             </div>
+
                             <div class="form-input">
-                                <input class="input" type="number" name="New People Testing Positive" id="new-tested-input"
-                                    placeholder="Enter a number">
+                                <span><b class="subquestion"> &nbsp NEW STAFF: &nbsp <input class="input input-short" type="number" name="New Staff Testing Positive" id="new-tested-input-staff"
+                                    placeholder="Enter a number"></span></b>
+                            </div>
+
+                            <div class="form-input">
+                                <span><b class="subquestion"> &nbsp NEW CLIENTS: &nbsp <input class="input input-short" type="number" name="New Clients Testing Positive" id="new-tested-input-client"
+                                    placeholder="Enter a number"></span></b>
                             </div>
                         </div>
 
                         <!-- New people with symptoms -->
                         <div class="form-block">
                             <div class="form-label">
-                                <div class="question">How many new people were flagged as having <b>symptoms</b> that could
+                                <div class="question">How many new staff and clients were flagged as having <b>symptoms</b> that could
                                     potentially be COVID-19 on your reporting date?</div>
-                                <div class="helptext">Include new guests at intake and existing guests. Only count new cases that have not already been reported by
+                                <div class="helptext">Only count new cases that have not already been reported by
                                     your shelter/facility.</div>
                             </div>
+
                             <div class="form-input">
-                                <input class="input" type="number" name="New People With Symptoms" id="new-input"
-                                    placeholder="Enter a number">
+                                <span><b class="subquestion"> &nbsp NEW STAFF: &nbsp <input class="input input-short" type="number" name="New Staff With Symptoms" id="new-input-staff"
+                                    placeholder="Enter a number"></span></b>
+                            </div>
+
+                            <div class="form-input">
+                                <span><b class="subquestion"> &nbsp NEW CLIENTS: &nbsp <input class="input input-short" type="number" name="New Clients With Symptoms" id="new-input-clients"
+                                    placeholder="Enter a number"></span></b>
                             </div>
                         </div>
+
+
+                        <!-- People under investigation -->
+                        <div class="form-block">
+                            <div class="form-label">
+                                <div class="question">How many new patients under investigation (PUI) are at your facility?</div>
+                            </div>
+
+                            <div class="form-input">
+                                <input class="input" type="number" name="Patients Under Investigation" id="investigation-input"
+                                    placeholder="Enter a number">
+                            </div>
+                            </div>
 
                         <!-- Staff out for illness -->
                         <div class="form-block">
@@ -193,7 +218,7 @@
                                     have been tested
                                     for
                                     COVID-19?</div>
-                                <div class="helptext">Include staff, volunteers, and guests tested <b>on any date</b>
+                                <div class="helptext">Include staff, volunteers, and clients tested <b>on any date</b>
                                 </div>
                             </div>
                             <div class="form-input">
